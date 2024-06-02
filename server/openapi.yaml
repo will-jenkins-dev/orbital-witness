@@ -1,0 +1,55 @@
+openapi: "3.0.0"
+
+info:
+  title: "Orbital Witness Usage Service"
+  description: ""
+  version: "0.0.1"
+
+paths:
+  /hello:
+    get:
+      operationId: app.hello
+      responses:
+        200:
+          description: "Hello world"
+          content:
+            text/plain:
+              schema:
+                type: string
+  /usage:
+    get:
+      operationId: app.usage
+      responses:
+        200:
+          description: "Usage report"
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                  - usage
+                properties:
+                  usage:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/usage"
+
+components:
+  schemas:
+    usage:
+      type: object
+      additionalProperties: false
+      required:
+        - message_id
+        - timestamp
+        - credits_used
+      properties:
+        message_id:
+          type: number
+        timestamp:
+          type: string
+        report_name:
+          type: string
+        credits_used:
+          type: number
